@@ -1,10 +1,16 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "./components/ui/button";
-import { Input } from "./components/ui/input";
-import { Textarea } from "./components/ui/textarea";
-import { Select } from "./components/ui/select";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Form,
   FormControl,
@@ -13,7 +19,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "./components/ui/form";
+} from "@/components/ui/form";
 import { contactSchema } from "./schemas/contact";
 import type { ContactFormValues } from "./schemas/contact";
 
@@ -21,7 +27,8 @@ export function App() {
   const [submitted, setSubmitted] = useState<ContactFormValues | null>(null);
 
   const form = useForm<ContactFormValues>({
-    resolver: zodResolver(contactSchema),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: zodResolver(contactSchema as any),
     defaultValues: {
       name: "",
       email: "",
@@ -81,14 +88,19 @@ export function App() {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Category</FormLabel>
-                    <FormControl>
-                      <Select {...field}>
-                        <option value="general">General Inquiry</option>
-                        <option value="support">Support</option>
-                        <option value="feedback">Feedback</option>
-                        <option value="bug">Bug Report</option>
-                      </Select>
-                    </FormControl>
+                    <Select value={field.value} onValueChange={field.onChange}>
+                      <FormControl>
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Select a category" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="general">General Inquiry</SelectItem>
+                        <SelectItem value="support">Support</SelectItem>
+                        <SelectItem value="feedback">Feedback</SelectItem>
+                        <SelectItem value="bug">Bug Report</SelectItem>
+                      </SelectContent>
+                    </Select>
                     <FormDescription>Select the topic of your message.</FormDescription>
                     <FormMessage />
                   </FormItem>
