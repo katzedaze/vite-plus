@@ -77,3 +77,15 @@ Tech stack:
 - zod v4
 - Tailwind CSS v4 (@tailwindcss/vite)
 - shadcn/ui components (Button, Input, Label, Textarea, Select, Form)
+
+## Testing
+
+```bash
+vp test
+```
+
+Tests (26 total):
+
+- **contact-schema.test.ts** (19 tests) — Zod schema validation for all fields (boundary values, error messages, multiple errors)
+- **utils.test.ts** (6 tests) — `cn()` utility (class merging, conditionals, Tailwind deduplication)
+- **packages/utils** (1 test) — Shared utilities

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { Button } from "./components/ui/button";
 import { Input } from "./components/ui/input";
 import { Textarea } from "./components/ui/textarea";
@@ -15,23 +14,8 @@ import {
   FormLabel,
   FormMessage,
 } from "./components/ui/form";
-
-const contactSchema = z.object({
-  name: z
-    .string()
-    .min(2, "Name must be at least 2 characters.")
-    .max(50, "Name must be at most 50 characters."),
-  email: z.string().email("Please enter a valid email address."),
-  category: z.enum(["general", "support", "feedback", "bug"], {
-    message: "Please select a category.",
-  }),
-  message: z
-    .string()
-    .min(10, "Message must be at least 10 characters.")
-    .max(500, "Message must be at most 500 characters."),
-});
-
-type ContactFormValues = z.infer<typeof contactSchema>;
+import { contactSchema } from "./schemas/contact";
+import type { ContactFormValues } from "./schemas/contact";
 
 export function App() {
   const [submitted, setSubmitted] = useState<ContactFormValues | null>(null);
