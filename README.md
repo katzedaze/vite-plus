@@ -76,7 +76,9 @@ Tech stack:
 - react-hook-form + @hookform/resolvers
 - zod v4
 - Tailwind CSS v4 (@tailwindcss/vite)
-- shadcn/ui components (Button, Input, Label, Textarea, Select, Form)
+- shadcn/ui (base-nova style, initialized via `shadcn` CLI)
+  - Components: Button, Input, Label, Textarea, Select, Form
+  - Primitives: @base-ui/react, @radix-ui/react-slot
 
 ## Testing
 
